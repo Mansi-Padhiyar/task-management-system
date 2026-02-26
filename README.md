@@ -1,47 +1,105 @@
-Architecture Decision
+Project Title: Full-Stack Task Management System
+Overview
 
-Frontend: React (component-based UI)
+This project is a full-stack task management application built using:
 
-Backend: Flask (lightweight REST API)
+Frontend: React
 
-Database: SQLite (lightweight relational DB)
+Backend: Flask
 
-Why?
+Database: SQLite (Relational Database)
 
-Clear separation of concerns
+The system allows users to create and view tasks through a REST API architecture.
 
-Simple but scalable architecture
+Architecture
 
-Easy to extend
+The system follows a three-layer architecture:
 
-Database Decision
+Presentation Layer – React frontend
 
-Why SQLite?
+Application Layer – Flask REST API
 
-Relational
+Persistence Layer – SQLite relational database
 
-No server setup
+The frontend communicates with the backend via HTTP requests.
+The backend handles validation, business logic, and persistence.
 
-Auto file-based storage
+Technical Decisions
+1. Flask for Backend
 
-Suitable for small-to-medium apps
+Flask was chosen because it is lightweight, flexible, and suitable for building RESTful APIs with minimal overhead.
 
-Easily replaceable with PostgreSQL later
+2. React for Frontend
 
-Validation Decision
+React was selected for its component-based architecture and state management capabilities.
 
-Validation handled at API boundary
+3. SQLite as Relational Database
 
-Backend rejects empty titles
+SQLite was chosen because:
 
-Prevents invalid system states
+It is fully relational (tables, primary keys, SQL support)
 
-Error Handling
+Requires no external server setup
 
-HTTP status codes used correctly:
+Suitable for small-to-medium applications
 
-200 → success
+Easily replaceable with PostgreSQL or MySQL in production
 
-201 → created
+4. API Validation at Backend
 
-400 → bad request
+Validation is enforced at the API boundary:
+
+Empty titles are rejected
+
+Proper HTTP status codes are returned
+
+This ensures system consistency and prevents invalid states.
+
+5. REST Standards
+
+GET /tasks → Retrieve tasks
+
+POST /tasks → Create task
+
+Uses correct HTTP status codes (200, 201, 400)
+
+Database Schema
+
+Table: tasks
+
+Column	Type	Constraint
+id	INTEGER	PRIMARY KEY AUTOINCREMENT
+title	TEXT	NOT NULL
+Risks & Limitations
+
+No authentication implemented
+
+No automated testing included
+
+SQLite not ideal for high concurrency
+
+No update/delete functionality yet
+
+Extension Approach
+
+Future improvements:
+
+Add PUT and DELETE endpoints
+
+Implement authentication
+
+Replace SQLite with PostgreSQL
+
+Add unit and integration tests
+
+Containerize using Docker
+
+How to Run
+Backend
+cd backend
+pip install -r requirements.txt
+python app.py
+Frontend
+cd frontend
+npm install
+npm start
