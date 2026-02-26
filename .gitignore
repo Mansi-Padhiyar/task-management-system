@@ -1,0 +1,12 @@
+# Python
+__pycache__/
+*.pyc
+
+# Database
+tasks.db
+
+# Node
+node_modules/
+
+# Environment
+.env
